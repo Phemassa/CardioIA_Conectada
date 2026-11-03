@@ -53,7 +53,7 @@ Esta entrega corresponde à **Fase 3** das 7 fases do CardioIA: [ver mapa mental
 
 | Entregável | Link |
 |---|---|
-| Projeto no Wokwi | ⚠️ `TODO(humano)`: colar o link depois de criar o projeto ([passo a passo](docs/EVIDENCIAS_ENTREGA.md#1-criar-o-projeto-no-wokwi)) |
+| Projeto no Wokwi | https://wokwi.com/projects/479712047921435649 |
 | Vídeo do Ir Além 2 (YouTube, não listado) | ⚠️ `TODO(humano)`: colar o link depois de gravar ([roteiro](docs/VIDEO_SCRIPT_4MIN.md)) |
 | Fase 1 do CardioIA | https://github.com/Cesar-Azeredo/CardioAI |
 
@@ -134,7 +134,7 @@ Os limites estão no firmware, no Node-RED e na API; um [teste automatizado](tes
 
 ### Parte 1: ESP32
 
-Rode no [Wokwi](https://wokwi.com) seguindo o [passo a passo](docs/EVIDENCIAS_ENTREGA.md#1-criar-o-projeto-no-wokwi). Na simulação:
+Abra o [projeto no Wokwi](https://wokwi.com/projects/479712047921435649) e clique em ▶. Com o dashboard aberto, teste:
 
 | Ação | Efeito |
 |---|---|
@@ -189,12 +189,12 @@ g++ -std=c++17 tests/test_edge_logic.cpp -o test_edge && ./test_edge
 
 ## 📌 Status do Projeto
 
-- ✅ Firmware compila para os alvos Wokwi, chip real com SPIFFS e HiveMQ Cloud com TLS (PlatformIO).
+- ✅ Firmware executado no Wokwi real: sensores, alertas, queda de conexão e MQTT, com roteiro automatizado em [scripts/teste_wokwi.py](scripts/teste_wokwi.py). [Monitor Serial da execução](assets/evidencias/wokwi_monitor_serial.txt).
+- ✅ Firmware compila também para chip real com SPIFFS e HiveMQ Cloud com TLS (PlatformIO).
 - ✅ Lógica de borda testada no computador: alertas, BPM, fila e JSON.
-- ✅ Dashboard testado de ponta a ponta: Node-RED + broker público HiveMQ + simulador Python.
+- ✅ Dashboard testado de ponta a ponta: ESP32 no Wokwi → broker público HiveMQ → Node-RED.
 - ✅ API REST testada com HTTP e SMTP reais em ambiente local (24 testes).
 - ✅ Notebook executado por inteiro com dados reais.
-- ⏳ **Firmware ainda não executado no Wokwi:** criar o projeto exige login do grupo. Ver [checklist](docs/EVIDENCIAS_ENTREGA.md).
 - ⏳ SPIFFS e TLS foram apenas compilados: não houve chip real nem cluster HiveMQ Cloud.
 - ⏳ Vídeo do Ir Além 2 a gravar.
 - ➖ Grafana (opcional) não foi usado.
@@ -203,13 +203,19 @@ g++ -std=c++17 tests/test_edge_logic.cpp -o test_edge && ./test_edge
 
 ## 📸 Evidências
 
-Os prints abaixo foram gerados por [scripts/capture_evidencias.py](scripts/capture_evidencias.py): o painel real, ligado ao broker público, recebendo o **simulador Python**. Os prints do ESP32 no Wokwi são pendência do grupo. Galeria completa em [assets/evidencias/README.md](assets/evidencias/README.md).
+Os prints abaixo vêm de uma execução real: **ESP32 simulado no Wokwi, publicando no broker público da HiveMQ, com o Node-RED assinando.** Galeria completa em [assets/evidencias/README.md](assets/evidencias/README.md).
 
-#### Alerta crítico de taquicardia
-![Taquicardia](assets/evidencias/dashboard_02_taquicardia.png)
+#### Wokwi: sem conexão, o alerta segue ativo e a fila cresce
+![Wokwi offline](assets/evidencias/wokwi_serial_offline.png)
 
-#### Volta da conexão: dados recuperados no horário original
-![Replay](assets/evidencias/dashboard_05_replay.png)
+#### Wokwi: a conexão volta e a fila é enviada com `"replay":true`
+![Wokwi sincronizando](assets/evidencias/wokwi_serial_sync.png)
+
+#### Dashboard: alerta crítico vindo do ESP32
+![Taquicardia](assets/evidencias/dashboard_esp32_taquicardia.png)
+
+#### Dashboard: dados recuperados no horário original
+![Replay](assets/evidencias/dashboard_esp32_replay.png)
 
 #### Ir Além 2: LR × LIF em pacientes fora do treino
 ![Curvas](assets/evidencias/ir_alem_2_curvas.png)
