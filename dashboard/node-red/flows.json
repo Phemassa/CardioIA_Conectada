@@ -1,0 +1,594 @@
+[
+  {
+    "id": "tab_cardioia",
+    "type": "tab",
+    "label": "CardioIA - Monitoramento",
+    "disabled": false,
+    "info": "Assina a telemetria do wearable via MQTT e alimenta o dashboard em /ui."
+  },
+  {
+    "id": "broker_hivemq",
+    "type": "mqtt-broker",
+    "name": "HiveMQ publico",
+    "broker": "broker.hivemq.com",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "birthTopic": "",
+    "closeTopic": "",
+    "willTopic": ""
+  },
+  {
+    "id": "ui_base_cardioia",
+    "type": "ui_base",
+    "theme": {
+      "name": "theme-dark",
+      "lightTheme": {
+        "default": "#0094CE",
+        "baseColor": "#0094CE",
+        "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+        "edited": false
+      },
+      "darkTheme": {
+        "default": "#097479",
+        "baseColor": "#097479",
+        "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+        "edited": false
+      },
+      "customTheme": {
+        "name": "Untitled Theme 1",
+        "default": "#4B7930",
+        "baseColor": "#4B7930",
+        "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+      },
+      "themeState": {
+        "base-color": {
+          "default": "#097479",
+          "value": "#097479",
+          "edited": false
+        },
+        "page-titlebar-backgroundColor": {
+          "value": "#097479",
+          "edited": false
+        },
+        "page-backgroundColor": {
+          "value": "#111111",
+          "edited": false
+        },
+        "page-sidebar-backgroundColor": {
+          "value": "#333333",
+          "edited": false
+        },
+        "group-textColor": {
+          "value": "#0eb8c0",
+          "edited": false
+        },
+        "group-borderColor": {
+          "value": "#555555",
+          "edited": false
+        },
+        "group-backgroundColor": {
+          "value": "#333333",
+          "edited": false
+        },
+        "widget-textColor": {
+          "value": "#eeeeee",
+          "edited": false
+        },
+        "widget-backgroundColor": {
+          "value": "#097479",
+          "edited": false
+        },
+        "widget-borderColor": {
+          "value": "#333333",
+          "edited": false
+        },
+        "base-font": {
+          "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+        }
+      },
+      "angularTheme": {
+        "primary": "indigo",
+        "accents": "blue",
+        "warn": "red",
+        "background": "grey",
+        "palette": "light"
+      }
+    },
+    "site": {
+      "name": "CardioIA - Monitoramento Contínuo",
+      "hideToolbar": "false",
+      "allowSwipe": "false",
+      "lockMenu": "false",
+      "allowTempTheme": "true",
+      "dateFormat": "DD/MM/YYYY",
+      "sizes": {
+        "sx": 48,
+        "sy": 48,
+        "gx": 6,
+        "gy": 6,
+        "cx": 6,
+        "cy": 6,
+        "px": 0,
+        "py": 0
+      }
+    }
+  },
+  {
+    "id": "ui_tab_paciente",
+    "type": "ui_tab",
+    "name": "CardioIA - Wearable 01",
+    "icon": "favorite",
+    "order": 1,
+    "disabled": false,
+    "hidden": false
+  },
+  {
+    "id": "ui_grp_estado",
+    "type": "ui_group",
+    "name": "Painel do paciente",
+    "tab": "ui_tab_paciente",
+    "order": 1,
+    "disp": true,
+    "width": "12",
+    "collapse": false
+  },
+  {
+    "id": "ui_grp_series",
+    "type": "ui_group",
+    "name": "Séries temporais",
+    "tab": "ui_tab_paciente",
+    "order": 2,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "in_telemetria",
+    "type": "mqtt in",
+    "z": "tab_cardioia",
+    "name": "Telemetria",
+    "topic": "cardioia/grupo-zion/wearable-01/telemetria",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "broker_hivemq",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 130,
+    "y": 160,
+    "wires": [
+      [
+        "fn_fog",
+        "dbg_telemetria"
+      ]
+    ]
+  },
+  {
+    "id": "in_status",
+    "type": "mqtt in",
+    "z": "tab_cardioia",
+    "name": "Status (online/offline)",
+    "topic": "cardioia/grupo-zion/wearable-01/status",
+    "qos": "1",
+    "datatype": "utf8",
+    "broker": "broker_hivemq",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 160,
+    "y": 480,
+    "wires": [
+      [
+        "fn_status"
+      ]
+    ]
+  },
+  {
+    "id": "dbg_telemetria",
+    "type": "debug",
+    "z": "tab_cardioia",
+    "name": "Telemetria bruta",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 370,
+    "y": 100,
+    "wires": []
+  },
+  {
+    "id": "fn_fog",
+    "type": "function",
+    "z": "tab_cardioia",
+    "name": "Fog: valida, data e classifica",
+    "outputs": 8,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 400,
+    "y": 160,
+    "outputLabels": [
+      "BPM (grafico)",
+      "Temperatura (grafico)",
+      "Temperatura (gauge)",
+      "BPM (gauge)",
+      "Umidade/movimento (texto)",
+      "Estado (LED)",
+      "Historico",
+      "Sincronizacao"
+    ],
+    "func": "// Camada Fog: reavalia os limites sem confiar so no dispositivo e separa o que e\n// \"agora\" do que e historico recuperado apos uma queda de conexao.\nconst LIM = { bpmAlto: 120, bpmBaixo: 50, tempFebre: 38.0 };\n\nconst d = msg.payload;\nif (typeof d !== 'object' || d === null || typeof d.seq !== 'number') {\n    node.warn('Telemetria invalida descartada');\n    return null;\n}\n\n// age_s = ha quantos segundos a amostra foi capturada. null = veio de um boot anterior.\nconst temIdade = typeof d.age_s === 'number';\nconst capturadaEm = Date.now() - (temIdade ? d.age_s * 1000 : 0);\n\nconst criticos = [];\nif (d.bpm > LIM.bpmAlto) criticos.push('TAQUICARDIA');\nif (d.bpm > 0 && d.bpm < LIM.bpmBaixo) criticos.push('BRADICARDIA');\nif (typeof d.temp_c === 'number' && d.temp_c > LIM.tempFebre) criticos.push('FEBRE');\nconst atencao = (d.alertas || []).includes('IMOBILIDADE') ? ['IMOBILIDADE'] : [];\n\n// Sem horario confiavel, nao entra no grafico: apareceria como se tivesse acabado de ocorrer.\nconst bpmChart = temIdade ? { payload: d.bpm, topic: 'BPM', timestamp: capturadaEm } : null;\nconst tempChart = temIdade && typeof d.temp_c === 'number' ? { payload: d.temp_c, topic: 'Temperatura', timestamp: capturadaEm } : null;\n\nconst todos = criticos.concat(atencao);\nconst historico = todos.length ? { payload: { em: capturadaEm, horaConhecida: temIdade, seq: d.seq, bpm: d.bpm, temp: d.temp_c, alertas: todos, replay: !!d.replay } } : null;\n\nconst sinc = { payload: { fila: d.fila, replay: !!d.replay } };\n\n// Amostra recuperada vai ao grafico e ao historico, mas nao pode mover os indicadores\n// de \"agora\": um alerta de horas atras nao deve acender o LED como se fosse atual.\nif (d.replay) {\n    return [bpmChart, tempChart, null, null, null, null, historico, sinc];\n}\n\nflow.set('ultimaAmostraEm', Date.now());\nflow.set('semDados', false);\n\nconst nivel = criticos.length ? 'critico' : (atencao.length ? 'atencao' : (d.bpm === 0 ? 'semsinal' : 'normal'));\nconst estado = { payload: { nivel: nivel, alertas: todos, bpm: d.bpm, temp: d.temp_c } };\nconst tempGauge = typeof d.temp_c === 'number' ? { payload: d.temp_c } : null;\nconst bpmGauge = { payload: d.bpm };\nconst texto = { payload: (d.umid_pct === null ? '--' : d.umid_pct.toFixed(1) + ' %') + ' | ' + (d.mov_mg === null ? '--' : d.mov_mg + ' mg') };\n\nreturn [bpmChart, tempChart, tempGauge, bpmGauge, texto, estado, historico, sinc];\n",
+    "wires": [
+      [
+        "ui_chart_bpm"
+      ],
+      [
+        "ui_chart_temp"
+      ],
+      [
+        "ui_gauge_temp"
+      ],
+      [
+        "ui_gauge_bpm"
+      ],
+      [
+        "ui_text_ambiente"
+      ],
+      [
+        "ui_led"
+      ],
+      [
+        "fn_historico"
+      ],
+      [
+        "fn_sync"
+      ]
+    ]
+  },
+  {
+    "id": "ui_led",
+    "type": "ui_template",
+    "z": "tab_cardioia",
+    "group": "ui_grp_estado",
+    "name": "Indicador de alerta (LED virtual)",
+    "order": 1,
+    "width": "6",
+    "height": "3",
+    "format": "<style>\n .led-wrap { display:flex; align-items:center; gap:16px; height:100%; padding:0 8px; }\n .led { width:64px; height:64px; border-radius:50%; flex:none; background:#555; }\n .led-normal { background:#2ecc71; box-shadow:0 0 18px #2ecc71; }\n .led-atencao { background:#f1c40f; box-shadow:0 0 18px #f1c40f; }\n .led-critico { background:#e74c3c; box-shadow:0 0 26px #e74c3c; animation:pisca 1s infinite; }\n @keyframes pisca { 50% { opacity:.35; } }\n .led-titulo { font-size:22px; font-weight:600; }\n .led-detalhe { font-size:14px; opacity:.85; margin-top:4px; }\n</style>\n<div class=\"led-wrap\">\n  <div id=\"led-indicador\" class=\"led\" ng-class=\"'led-' + (msg.payload.nivel || 'aguardando')\"></div>\n  <div>\n    <div class=\"led-titulo\" ng-switch=\"msg.payload.nivel\">\n      <span ng-switch-when=\"critico\">ALERTA CRÍTICO</span>\n      <span ng-switch-when=\"atencao\">ATENÇÃO</span>\n      <span ng-switch-when=\"normal\">Normal</span>\n      <span ng-switch-when=\"semsinal\">Sem sinal de pulso</span>\n      <span ng-switch-when=\"semdados\">SEM DADOS</span>\n      <span ng-switch-default>Aguardando dados</span>\n    </div>\n    <div class=\"led-detalhe\" ng-if=\"msg.payload.alertas.length\">{{msg.payload.alertas.join(' + ')}}</div>\n    <div class=\"led-detalhe\" ng-if=\"msg.payload.nivel === 'semdados'\">Nenhuma leitura recente: o estado do paciente é desconhecido</div>\n  </div>\n</div>",
+    "storeOutMessages": true,
+    "fwdInMessages": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 760,
+    "y": 300,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ui_gauge_bpm",
+    "type": "ui_gauge",
+    "z": "tab_cardioia",
+    "name": "BPM",
+    "group": "ui_grp_estado",
+    "order": 2,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Batimentos",
+    "label": "bpm",
+    "format": "{{value}}",
+    "min": "0",
+    "max": "200",
+    "colors": [
+      "#3498db",
+      "#2ecc71",
+      "#e74c3c"
+    ],
+    "seg1": "50",
+    "seg2": "120",
+    "className": "",
+    "x": 690,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "ui_gauge_temp",
+    "type": "ui_gauge",
+    "z": "tab_cardioia",
+    "name": "Temperatura",
+    "group": "ui_grp_estado",
+    "order": 3,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Temperatura",
+    "label": "°C",
+    "format": "{{value | number:1}}",
+    "min": "34",
+    "max": "42",
+    "colors": [
+      "#3498db",
+      "#2ecc71",
+      "#e74c3c"
+    ],
+    "seg1": "35",
+    "seg2": "38",
+    "className": "",
+    "x": 710,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "ui_text_ambiente",
+    "type": "ui_text",
+    "z": "tab_cardioia",
+    "group": "ui_grp_estado",
+    "order": 6,
+    "width": "12",
+    "height": "1",
+    "name": "Umidade e movimento",
+    "label": "Umidade | Movimento",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 730,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "ui_chart_bpm",
+    "type": "ui_chart",
+    "z": "tab_cardioia",
+    "name": "BPM",
+    "group": "ui_grp_series",
+    "order": 1,
+    "width": "6",
+    "height": "5",
+    "label": "Batimentos (bpm)",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "Aguardando dados",
+    "dot": true,
+    "ymin": "0",
+    "ymax": "200",
+    "removeOlder": "15",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "useUTC": false,
+    "colors": [
+      "#e74c3c",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "outputs": 1,
+    "useDifferentColor": false,
+    "className": "",
+    "x": 690,
+    "y": 100,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ui_chart_temp",
+    "type": "ui_chart",
+    "z": "tab_cardioia",
+    "name": "Temperatura",
+    "group": "ui_grp_series",
+    "order": 2,
+    "width": "6",
+    "height": "5",
+    "label": "Temperatura (°C)",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "Aguardando dados",
+    "dot": true,
+    "ymin": "34",
+    "ymax": "42",
+    "removeOlder": "15",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "useUTC": false,
+    "colors": [
+      "#3498db",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "outputs": 1,
+    "useDifferentColor": false,
+    "className": "",
+    "x": 710,
+    "y": 140,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "fn_historico",
+    "type": "function",
+    "z": "tab_cardioia",
+    "name": "Mantem os ultimos alertas",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 730,
+    "y": 360,
+    "func": "// Mantem os ultimos alertas, do mais recente para o mais antigo, com o horario de captura.\nconst lista = flow.get('historico') || [];\nconst a = msg.payload;\nconst hora = a.horaConhecida ? new Date(a.em).toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : 'antes do reinicio';\nlista.unshift({ hora: hora, alertas: a.alertas.join(' + '), bpm: a.bpm, temp: a.temp, origem: a.replay ? 'Recuperado do buffer' : 'Tempo real' });\nlista.splice(12);\nflow.set('historico', lista);\nreturn { payload: lista };\n",
+    "wires": [
+      [
+        "ui_historico"
+      ]
+    ]
+  },
+  {
+    "id": "ui_historico",
+    "type": "ui_template",
+    "z": "tab_cardioia",
+    "group": "ui_grp_estado",
+    "name": "Tabela de alertas",
+    "order": 7,
+    "width": "12",
+    "height": "6",
+    "format": "<table style=\"width:100%; border-collapse:collapse; font-size:14px;\">\n  <thead><tr style=\"text-align:left;\"><th>Captura</th><th>Alerta</th><th>BPM</th><th>Temp (°C)</th><th>Origem</th></tr></thead>\n  <tbody>\n    <tr ng-repeat=\"a in msg.payload\" style=\"border-top:1px solid #555;\"><td>{{a.hora}}</td><td>{{a.alertas}}</td><td>{{a.bpm}}</td><td>{{a.temp | number:1}}</td><td>{{a.origem}}</td></tr>\n    <tr ng-if=\"!msg.payload.length\"><td colspan=\"5\" style=\"opacity:.7;\">Nenhum alerta registrado</td></tr>\n  </tbody>\n</table>",
+    "storeOutMessages": true,
+    "fwdInMessages": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 970,
+    "y": 360,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "fn_sync",
+    "type": "function",
+    "z": "tab_cardioia",
+    "name": "Conta amostras recuperadas",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 740,
+    "y": 420,
+    "func": "const total = (flow.get('totalReplay') || 0) + (msg.payload.replay ? 1 : 0);\nflow.set('totalReplay', total);\nreturn { payload: total + ' recuperadas | ' + msg.payload.fila + ' na fila' };\n",
+    "wires": [
+      [
+        "ui_text_sync"
+      ]
+    ]
+  },
+  {
+    "id": "ui_text_sync",
+    "type": "ui_text",
+    "z": "tab_cardioia",
+    "group": "ui_grp_estado",
+    "order": 5,
+    "width": "6",
+    "height": "1",
+    "name": "Sincronizacao",
+    "label": "Buffer offline",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 970,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "fn_status",
+    "type": "function",
+    "z": "tab_cardioia",
+    "name": "Formata conexao",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 390,
+    "y": 480,
+    "func": "msg.payload = msg.payload === 'online' ? 'Online' : 'Offline (gravando no buffer local)';\nreturn msg;\n",
+    "wires": [
+      [
+        "ui_text_conexao"
+      ]
+    ]
+  },
+  {
+    "id": "ui_text_conexao",
+    "type": "ui_text",
+    "z": "tab_cardioia",
+    "group": "ui_grp_estado",
+    "order": 4,
+    "width": "6",
+    "height": "1",
+    "name": "Conexao",
+    "label": "Dispositivo",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 700,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "inj_watchdog",
+    "type": "inject",
+    "z": "tab_cardioia",
+    "name": "A cada 5 s",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "5",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "1",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 130,
+    "y": 300,
+    "wires": [
+      [
+        "fn_watchdog"
+      ]
+    ]
+  },
+  {
+    "id": "fn_watchdog",
+    "type": "function",
+    "z": "tab_cardioia",
+    "name": "Watchdog: sem dados ha 20 s",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 370,
+    "y": 300,
+    "func": "// Sem leitura recente, o painel nao pode continuar mostrando o ultimo verde:\n// \"nao sei\" e diferente de \"esta tudo bem\".\nconst ultima = flow.get('ultimaAmostraEm');\nif (!ultima || flow.get('semDados')) return null;\nif (Date.now() - ultima < 20000) return null;\nflow.set('semDados', true);\nreturn { payload: { nivel: 'semdados', alertas: [] } };\n",
+    "wires": [
+      [
+        "ui_led"
+      ]
+    ]
+  }
+]

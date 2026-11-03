@@ -1,0 +1,13 @@
+{
+  "name": "cardioia-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dashboard Node-RED do CardioIA. Rode `npm install` e depois `npm start`; o painel abre em http://localhost:1880/ui",
+  "scripts": {
+    "start": "node-red --userDir ./.node-red-data ./flows.json"
+  },
+  "dependencies": {
+    "node-red": "^4.0.0",
+    "node-red-dashboard": "^3.6.0"
+  }
+}
