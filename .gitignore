@@ -20,3 +20,9 @@ firmware/sketch/secrets.h
 # Node-RED
 node_modules/
 .node-red-data/
+
+# Diagnostico do teste no Wokwi
+assets/evidencias/falha_wokwi.png
+
+# Video do Ir Alem 2: publicado no YouTube, nao no Git
+video/
