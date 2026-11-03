@@ -1,0 +1,16 @@
+Subject: [CardioIA] TAQUICARDIA - wearable-01
+From: cardioia@example.com
+To: equipe-cardiologia@example.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Alerta automatico do dispositivo wearable-01.
+
+- TAQUICARDIA (critico): 137 bpm, acima do limite de 120 bpm
+
+Batimentos: 137 bpm
+Temperatura: 36.8 °C
+Movimento: 63 mg
+
+Projeto academico com dados simulados. Nao usar para decisao clinica.

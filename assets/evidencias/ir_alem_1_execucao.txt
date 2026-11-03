@@ -1,0 +1,37 @@
+bpm= 71 temp=36.4 mov=174 -> normal   -
+bpm= 72 temp=36.8 mov=339 -> normal   -
+bpm= 70 temp=36.7 mov=107 -> normal   -
+bpm= 74 temp=36.5 mov=347 -> normal   -
+bpm= 74 temp=36.8 mov=274 -> normal   -
+bpm=137 temp=36.8 mov= 63 -> critico  TAQUICARDIA | e-mail: data/runtime/emails/alerta_1793745078065.eml
+bpm=135 temp=36.9 mov=139 -> critico  TAQUICARDIA
+bpm=136 temp=37.0 mov=107 -> critico  TAQUICARDIA
+bpm= 96 temp=38.3 mov=369 -> critico  FEBRE | e-mail: data/runtime/emails/alerta_1793745078126.eml
+bpm= 94 temp=38.7 mov=334 -> critico  FEBRE
+bpm= 91 temp=38.8 mov=342 -> critico  FEBRE
+bpm= 64 temp=36.5 mov= 11 -> normal   -
+bpm= 69 temp=36.4 mov=  7 -> normal   -
+bpm= 64 temp=36.6 mov=  3 -> normal   -
+bpm= 66 temp=36.4 mov= 11 -> normal   -
+bpm= 62 temp=36.4 mov=  8 -> normal   -
+bpm= 70 temp=36.5 mov=  5 -> normal   -
+bpm= 68 temp=36.5 mov= 12 -> normal   -
+bpm= 64 temp=36.6 mov= 17 -> normal   -
+bpm= 63 temp=36.5 mov=  1 -> normal   -
+bpm= 63 temp=36.5 mov= 12 -> normal   -
+bpm= 64 temp=36.3 mov= 18 -> normal   -
+bpm= 65 temp=36.4 mov= 20 -> normal   -
+bpm= 67 temp=36.3 mov= 17 -> normal   -
+bpm= 68 temp=36.4 mov= 18 -> normal   -
+bpm= 66 temp=36.4 mov=  4 -> normal   -
+bpm= 68 temp=36.4 mov=  3 -> normal   -
+bpm= 62 temp=36.5 mov= 13 -> normal   -
+bpm= 69 temp=36.3 mov= 14 -> normal   -
+bpm= 68 temp=36.4 mov=  0 -> normal   -
+bpm= 70 temp=36.5 mov= 17 -> normal   -
+bpm= 64 temp=36.5 mov=  9 -> normal   -
+bpm= 66 temp=36.3 mov=  8 -> normal   -
+bpm= 68 temp=36.5 mov=  3 -> normal   -
+bpm= 70 temp=36.4 mov= 19 -> atencao  IMOBILIDADE | e-mail: data/runtime/emails/alerta_1793745078464.eml
+
+Registradas na API: 35 leituras, 7 com alerta
