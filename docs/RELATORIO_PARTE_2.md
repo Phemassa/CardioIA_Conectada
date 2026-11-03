@@ -111,7 +111,25 @@ Os limites escolhidos foram: BPM acima de 120, BPM abaixo de 50 e temperatura ac
 
 ## 4. Como foi verificado
 
-O teste ponta a ponta usou o Node-RED real, conectado ao broker público real, recebendo o [simulador Python](../scripts/simula_esp32.py), que publica o mesmo JSON do firmware. O script [capture_evidencias.py](../scripts/capture_evidencias.py) abre o painel em um navegador, confere em cada cenário o estado do LED, o texto esperado e a ausência de painéis sobrepostos, e só então salva o print.
+O sistema foi testado em duas etapas, ambas com o Node-RED real e o broker público real:
+
+1. **Com o ESP32 no [Wokwi](https://wokwi.com/projects/479712047921435649):** [teste_wokwi.py](../scripts/teste_wokwi.py) comanda a simulação e confere o painel em cada alerta.
+2. **Com o [simulador Python](../scripts/simula_esp32.py),** que publica o mesmo JSON do firmware: [capture_evidencias.py](../scripts/capture_evidencias.py) percorre os cenários em poucos minutos, conferindo o LED, o texto esperado e a ausência de painéis sobrepostos. É o que cobre o watchdog, pois a simulação no Wokwi segue publicando.
+
+**Com o ESP32 no Wokwi:**
+
+| Cenário | Resultado | Evidência |
+|---|---|---|
+| Sinais normais | LED verde | [print](../assets/evidencias/dashboard_esp32_normal.png) |
+| Taquicardia | LED vermelho | [print](../assets/evidencias/dashboard_esp32_taquicardia.png) |
+| Febre | LED vermelho | [print](../assets/evidencias/dashboard_esp32_febre.png) |
+| Dispositivo offline | Status "Offline" | [print](../assets/evidencias/dashboard_esp32_offline.png) |
+| Reconexão | Alertas "Recuperado do buffer" no horário original; LED segue o estado atual | [print](../assets/evidencias/dashboard_esp32_replay.png) |
+| Imobilidade | LED amarelo | [print](../assets/evidencias/dashboard_esp32_imobilidade.png) |
+
+Na mesma execução, conferimos pelo campo `seq` que as amostras chegaram ao cliente MQTT em ordem, sem lacunas nem repetições, e a conexão veio de um ESP32 simulado atravessando o gateway público do Wokwi.
+
+**Com o simulador Python:**
 
 | Cenário | LED esperado | Resultado | Evidência |
 |---|---|---|---|
@@ -125,7 +143,7 @@ O teste ponta a ponta usou o Node-RED real, conectado ao broker público real, r
 
 No print de reconexão, parte das amostras retidas aparece como "Tempo real". Isso é esperado: elas tinham menos de 10 s ao chegar, abaixo do limite que define o replay.
 
-**Pendências:** o firmware ainda não foi executado no Wokwi, portanto os prints acima mostram o painel recebendo o simulador, não o ESP32. O tempo de sincronização de uma fila cheia de 4.000 amostras também não foi medido.
+**Não medido:** o tempo de sincronização de uma fila cheia de 4.000 amostras; a maior fila testada no Wokwi teve 7 amostras.
 
 ## 5. Eficiência, segurança e boas práticas
 

@@ -50,11 +50,28 @@ O número veio de um limite medido. O plano inicial era de 5.000 amostras (quase
 | Compilação com PlatformIO (Wokwi, chip real com SPIFFS, TLS) | Sucesso nas três; alvo Wokwi usa 33,6% da RAM e 59,8% da flash |
 | Testes da lógica de borda no computador ([test_edge_logic.cpp](../tests/test_edge_logic.cpp)) | Todos passam: limites, BPM, fila, descarte, JSON |
 | Maior JSON possível | 201 bytes, abaixo do limite de 256 |
-| Execução no Wokwi | **Pendente:** exige login do grupo ([passo a passo](EVIDENCIAS_ENTREGA.md)) |
+| Execução no [Wokwi](https://wokwi.com/projects/479712047921435649) ([teste_wokwi.py](../scripts/teste_wokwi.py)) | Todos os passos passaram: ver abaixo |
+
+Na execução no Wokwi registrada em [wokwi_monitor_serial.txt](../assets/evidencias/wokwi_monitor_serial.txt), um script comandou a simulação como uma pessoa faria e conferiu o Monitor Serial e os LEDs:
+
+| Passo | Observado |
+|---|---|
+| Leitura dos sensores | DHT22 em 36,6 °C e 55%; MPU6050 detectando movimento |
+| Taquicardia (130 bpm) | LED vermelho aceso, `flags=0x01` |
+| Febre (DHT22 em 38,6 °C) | `flags=0x04` |
+| Botão, cerca de 80 toques por minuto | BPM de 77 |
+| 2 minutos sem movimento | `flags=0x08`, sem acender o LED vermelho |
+| Switch desligado | LEDs amarelo e vermelho acesos; fila chegou a 6 amostras |
+| Switch religado | Fila enviada em ordem, com as mais antigas marcadas `"replay":true` (idade de até 33 s) e nenhuma amostra perdida ou repetida |
+| Memória ao final | 160 kB de heap livre |
+
+**O que o teste real encontrou:** após reconectar, surgia uma leitura `bpm=0`. Uma tentativa de conexão pode bloquear o `loop()` por até 5 s, e o batimento simulado pelo comando `b130` parava nesse intervalo. Os toques do botão não sofrem com isso, porque usam interrupção. Corrigimos repondo as batidas do período. Também removemos a mensagem "conexão perdida", que aparecia indevidamente depois de um desligamento intencional.
 
 ## 6. Limitações
 
 - Sem SPIFFS, uma reinicialização do ESP32 perde a fila que está em RAM.
+- A tentativa de conexão MQTT bloqueia o `loop()` por até 5 s, o que pode atrasar uma coleta. No Wokwi, a primeira tentativa às vezes expira (estado -4), e a seguinte conecta.
+- O teste no Wokwi cobriu uma queda curta (6 amostras). A fila cheia e o descarte foram testados apenas no computador.
 - A confirmação de envio é só do cliente MQTT local. Com QoS 0 não há aviso de entrega pelo broker, então uma queda no momento exato do envio pode perder a amostra.
 - O botão simula o batimento; ele não mede um coração real. O alerta de imobilidade usa 2 minutos para caber em uma demonstração, e em uso real o valor seria maior.
 - BPM igual a 0 não gera alerta. Num produto real, sensor sem sinal precisaria de um alerta próprio.

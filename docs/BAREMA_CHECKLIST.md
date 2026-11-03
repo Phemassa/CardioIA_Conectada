@@ -6,17 +6,17 @@ Legenda: ✅ pronto e verificado · ⏳ depende de ação do grupo · ➖ opcion
 
 | Critério | Pontos | Status | Evidência |
 |---|---|---|---|
-| Leitura de sensores | 2 | ⏳ Código compila e a lógica está testada; falta rodar no Wokwi | [sketch.ino](../firmware/sketch/sketch.ino) |
-| Resiliência offline (Edge) | 2 | ⏳ Lógica da fila testada no computador; falta rodar no Wokwi | [edge_logic.h](../firmware/sketch/edge_logic.h), [testes](../tests/test_edge_logic.cpp) |
-| Envio via MQTT e broker | 2 | ⏳ Broker e assinatura testados com o simulador; falta o ESP32 publicar pelo Wokwi | [Relatório Parte 2](RELATORIO_PARTE_2.md) |
-| Dashboard funcional e alertas | 2 | ✅ Sete cenários conferidos no painel real | [prints](../assets/evidencias/README.md) |
+| Leitura de sensores | 2 | ✅ Executado no Wokwi | [sketch.ino](../firmware/sketch/sketch.ino), [Monitor Serial](../assets/evidencias/wokwi_monitor_serial.txt) |
+| Resiliência offline (Edge) | 2 | ✅ Queda e sincronização no Wokwi, sem perda de amostras | [edge_logic.h](../firmware/sketch/edge_logic.h), [testes](../tests/test_edge_logic.cpp), [print](../assets/evidencias/wokwi_serial_sync.png) |
+| Envio via MQTT e broker | 2 | ✅ ESP32 no Wokwi publicando no HiveMQ, com o Node-RED assinando | [Relatório Parte 2](RELATORIO_PARTE_2.md) |
+| Dashboard funcional e alertas | 2 | ✅ Cenários conferidos no painel real, recebendo o ESP32 | [prints](../assets/evidencias/README.md) |
 | Documentação (código + relatórios) | 2 | ✅ Código comentado e quatro relatórios | [docs](.) |
 
 ## Entregáveis
 
 ### Parte 1
 
-- [ ] ⏳ Link do projeto no Wokwi
+- [x] [Link do projeto no Wokwi](https://wokwi.com/projects/479712047921435649)
 - [x] Código C++ comentado
 - [x] Relatório de fluxo e resiliência (mínimo de 1 página): [Parte 1](RELATORIO_PARTE_1.md)
 - [x] DHT22 + segundo sensor (botão), mais MPU6050
@@ -31,8 +31,7 @@ Legenda: ✅ pronto e verificado · ⏳ depende de ação do grupo · ➖ opcion
 - [x] Envio via MQTT (HiveMQ)
 - [x] Gráfico, gauge e indicador de alerta no Node-RED
 - [x] Export do dashboard: [flows.json](../dashboard/node-red/flows.json)
-- [x] Prints do dashboard, recebendo o simulador Python
-- [ ] ⏳ Print do dashboard recebendo o ESP32 no Wokwi
+- [x] Prints do dashboard recebendo o ESP32 no Wokwi e o simulador Python
 - [x] Relatório MQTT e dashboard (mínimo de 2 páginas): [Parte 2](RELATORIO_PARTE_2.md)
 - ➖ Grafana Cloud (opcional)
 
@@ -46,7 +45,7 @@ Legenda: ✅ pronto e verificado · ⏳ depende de ação do grupo · ➖ opcion
 ### Ir Além 2
 
 - [x] Notebook comentado: [ir_alem_2_series_temporais.ipynb](../notebooks/ir_alem_2_series_temporais.ipynb)
-- [ ] ⏳ Repositório GitHub público com código e README (falta publicar)
+- [x] Repositório GitHub público com código e README
 - [x] Relatório comparativo: [Ir Além 2](RELATORIO_IR_ALEM_2.md)
 - [ ] ⏳ Vídeo de até 4 minutos, não listado, com link no README: [roteiro](VIDEO_SCRIPT_4MIN.md)
 
