@@ -71,9 +71,11 @@ void processarBatidas(uint32_t agora) {
     estimador.registrarBatida(batidasIsr[batidasLeitura]);
     batidasLeitura = (batidasLeitura + 1) % TAM_FILA_BATIDAS;
   }
-  if (simBpm > 0 && (int32_t)(agora - proximaBatidaSimMs) >= 0) {
-    estimador.registrarBatida(agora);
-    proximaBatidaSimMs = agora + 60000UL / simBpm;
+  // Usa o instante previsto de cada batida, e nao o atual: se uma tentativa de conexao
+  // bloqueou o loop, as batidas do periodo sao repostas, como faz a interrupcao do botao.
+  while (simBpm > 0 && (int32_t)(agora - proximaBatidaSimMs) >= 0) {
+    estimador.registrarBatida(proximaBatidaSimMs);
+    proximaBatidaSimMs += 60000UL / simBpm;
   }
 }
 
@@ -215,6 +217,7 @@ void atualizarSwitchWifi() {
     // Desconexao "limpa" nao dispara o Last Will, entao avisamos o status antes de sair.
     mqtt.publish(TOPICO_STATUS, "offline", true);
     mqtt.disconnect();
+    mqttEstavaConectado = false;  // Saida intencional: nao e uma "conexao perdida"
   }
   ultimaTentativaMqttMs = millis() - 5000;  // Ao religar, tenta na hora
   Serial.printf("[REDE] Wi-Fi simulado: %s\n", wifiSimulado ? "CONECTADO" : "DESCONECTADO");

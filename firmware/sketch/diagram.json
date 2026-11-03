@@ -5,8 +5,8 @@
   "parts": [
     { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
     { "type": "wokwi-dht22", "id": "dht", "top": -105, "left": 170, "attrs": { "temperature": "36.6", "humidity": "55" } },
-    { "type": "wokwi-mpu6050", "id": "mpu", "top": 230, "left": 150, "attrs": {} },
-    { "type": "wokwi-pushbutton", "id": "btn", "top": 20, "left": 260, "attrs": { "color": "blue", "label": "Batimento", "bounce": "0" } },
+    { "type": "wokwi-mpu6050", "id": "mpu", "top": 110, "left": 190, "attrs": {} },
+    { "type": "wokwi-pushbutton", "id": "btn", "top": 20, "left": 190, "attrs": { "color": "blue", "label": "Batimento", "bounce": "0" } },
     { "type": "wokwi-slide-switch", "id": "sw", "top": 190, "left": -130, "attrs": { "bounce": "0" } },
     { "type": "wokwi-led", "id": "ledR", "top": 40, "left": -180, "attrs": { "color": "red", "label": "Alerta" } },
     { "type": "wokwi-led", "id": "ledY", "top": 40, "left": -120, "attrs": { "color": "yellow", "label": "Offline" } },
