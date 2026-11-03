@@ -1,0 +1,21 @@
+# Python 3.12. Firmware e Node-RED tem dependencias proprias (platformio.ini, dashboard/node-red/package.json).
+
+# Simulador MQTT (scripts/simula_esp32.py)
+paho-mqtt>=2.1,<3
+
+# Ir Alem 1: API REST, cliente e e-mail
+flask>=3.0,<4
+requests>=2.32,<3
+
+# Ir Alem 2: notebook de series temporais
+numpy>=2.0,<3
+pandas>=2.2,<3
+scikit-learn>=1.5,<2
+matplotlib>=3.9,<4
+wfdb>=4.1,<5
+jupyter>=1.1,<2
+
+# Testes e evidencias
+pytest>=8,<10
+aiosmtpd>=1.4,<2
+playwright>=1.45,<2
