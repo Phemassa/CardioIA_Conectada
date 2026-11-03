@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "author": "Grupo Zion - CardioIA",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -105, "left": 170, "attrs": { "temperature": "36.6", "humidity": "55" } },
+    { "type": "wokwi-mpu6050", "id": "mpu", "top": 230, "left": 150, "attrs": {} },
+    { "type": "wokwi-pushbutton", "id": "btn", "top": 20, "left": 260, "attrs": { "color": "blue", "label": "Batimento", "bounce": "0" } },
+    { "type": "wokwi-slide-switch", "id": "sw", "top": 190, "left": -130, "attrs": { "bounce": "0" } },
+    { "type": "wokwi-led", "id": "ledR", "top": 40, "left": -180, "attrs": { "color": "red", "label": "Alerta" } },
+    { "type": "wokwi-led", "id": "ledY", "top": 40, "left": -120, "attrs": { "color": "yellow", "label": "Offline" } },
+    { "type": "wokwi-resistor", "id": "rR", "top": 130, "left": -210, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rY", "top": 130, "left": -150, "rotate": 90, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht:VCC", "esp:3V3", "red", [] ],
+    [ "dht:SDA", "esp:15", "green", [] ],
+    [ "dht:GND", "esp:GND.2", "black", [] ],
+    [ "mpu:VCC", "esp:3V3", "red", [] ],
+    [ "mpu:GND", "esp:GND.3", "black", [] ],
+    [ "mpu:SDA", "esp:21", "blue", [] ],
+    [ "mpu:SCL", "esp:22", "orange", [] ],
+    [ "btn:1.l", "esp:4", "purple", [] ],
+    [ "btn:2.l", "esp:GND.2", "black", [] ],
+    [ "sw:2", "esp:27", "cyan", [] ],
+    [ "sw:3", "esp:GND.1", "black", [] ],
+    [ "ledR:A", "esp:25", "red", [] ],
+    [ "ledR:C", "rR:1", "black", [] ],
+    [ "rR:2", "esp:GND.1", "black", [] ],
+    [ "ledY:A", "esp:26", "yellow", [] ],
+    [ "ledY:C", "rY:1", "black", [] ],
+    [ "rY:2", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
