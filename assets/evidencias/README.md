@@ -1,8 +1,44 @@
 # Galeria de Evidências
 
-**Origem:** os prints do dashboard foram gerados por `scripts/capture_evidencias.py`, com o Node-RED real ligado ao broker público da HiveMQ. Os dados vêm do **simulador Python** (`scripts/simula_esp32.py`), que publica o mesmo JSON do firmware, e não do ESP32. Os prints do Wokwi estão pendentes: ver [docs/EVIDENCIAS_ENTREGA.md](../../docs/EVIDENCIAS_ENTREGA.md).
+## Parte 1: ESP32 no Wokwi
 
-## Parte 2: Dashboard
+Gerados por `scripts/teste_wokwi.py`. Registro completo: [Monitor Serial](wokwi_monitor_serial.txt).
+
+### Circuito em execução, online
+![Circuito](wokwi_circuito.png)
+
+### Taquicardia: LED vermelho aceso
+![Taquicardia no Wokwi](wokwi_alerta_taquicardia.png)
+
+### Sem conexão: LEDs acesos e fila crescendo
+![Offline](wokwi_serial_offline.png)
+
+### Conexão de volta: fila enviada com `"replay":true`
+![Sincronização](wokwi_serial_sync.png)
+
+## Parte 2: Dashboard recebendo o ESP32 do Wokwi
+
+### Sinais normais
+![Normal](dashboard_esp32_normal.png)
+
+### Taquicardia
+![Taquicardia](dashboard_esp32_taquicardia.png)
+
+### Febre
+![Febre](dashboard_esp32_febre.png)
+
+### Dispositivo offline
+![Offline](dashboard_esp32_offline.png)
+
+### Reconexão: dados recuperados no horário original
+![Replay](dashboard_esp32_replay.png)
+
+### Imobilidade (nível de atenção)
+![Imobilidade](dashboard_esp32_imobilidade.png)
+
+## Parte 2: Dashboard recebendo o simulador Python
+
+Gerados por `scripts/capture_evidencias.py`. Os dados vêm de `scripts/simula_esp32.py`, que publica o mesmo JSON do firmware, e não do ESP32.
 
 ### Sinais normais
 ![Normal](dashboard_01_normal.png)
