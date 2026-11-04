@@ -54,7 +54,7 @@ Esta entrega corresponde à **Fase 3** das 7 fases do CardioIA: [ver mapa mental
 | Entregável | Link |
 |---|---|
 | Projeto no Wokwi | https://wokwi.com/projects/479712047921435649 |
-| Vídeo do Ir Além 2 (YouTube, não listado) | ⚠️ `TODO(humano)`: colar o link depois de gravar ([roteiro](docs/VIDEO_SCRIPT_4MIN.md)) |
+| Vídeo do Ir Além 2 (YouTube, não listado) | https://www.youtube.com/watch?v=HavGiwZKTMc |
 | Fase 1 do CardioIA | https://github.com/Cesar-Azeredo/CardioAI |
 
 ---
