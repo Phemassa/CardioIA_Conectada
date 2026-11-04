@@ -2,6 +2,8 @@
 
 Publicar no YouTube como **não listado** e colar o link no README. Tela: notebook aberto, rolando conforme a fala.
 
+O vídeo gerado usa este roteiro como base, com ajustes para a voz sintética: "dispositivo vestível" no lugar de "wearable" e "área sob a curva" no lugar de "AUC-PR".
+
 ## 0:00 a 0:30 | O problema
 
 > Somos o Grupo Zion, do projeto CardioIA. O wearable da nossa Fase 3 mede o intervalo entre batimentos. A pergunta aqui é: só com esses intervalos, dá para detectar trechos com arritmia? E uma rede neuromórfica compete com um modelo tradicional?

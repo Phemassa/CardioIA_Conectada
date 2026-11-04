@@ -2,7 +2,7 @@
 
 ## O que falta o grupo fazer
 
-- [ ] Assistir ao vídeo do Ir Além 2 (3:38, narração por voz sintética), gerado em `video/cardioia_ir_alem_2.mp4` na máquina de quem o criou, fora do Git. Se preferirem narrar, o roteiro está em [VIDEO_SCRIPT_4MIN.md](VIDEO_SCRIPT_4MIN.md).
+- [ ] Assistir ao vídeo do Ir Além 2 (2:55, narração por voz neural sintética), em [video/cardioia_ir_alem_2.mp4](../video/cardioia_ir_alem_2.mp4). Se preferirem narrar, o roteiro está em [VIDEO_SCRIPT_4MIN.md](VIDEO_SCRIPT_4MIN.md).
 - [ ] Publicar o vídeo no YouTube como **não listado**, colar o link no [README](../README.md) e testar em uma janela anônima.
 - [ ] Confirmar nomes e RMs no README.
 - [ ] Opcional: abrir o [projeto no Wokwi](https://wokwi.com/projects/479712047921435649) com a conta do grupo, salvar uma cópia e trocar o link no README. O projeto atual foi salvo sem login e não pertence a nenhuma conta, portanto vocês não conseguem editá-lo pela conta do grupo. Ele é público: o modo não listado do Wokwi é pago.
